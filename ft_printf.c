@@ -10,57 +10,54 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include<stdarg.h>
+#include "ft_printf.h"
 
-void	ft_flags(const char *str_char, va_list args, unsigned int *counter)
+int	ft_check_conditions(char c, va_list args)
 {
-	int	result_c;
+	int	counter;
 
-	if (*str_char == 'c')
-	{
-		result_c = va_arg(args, int);
-		*counter += write(1, &result_c, 1);
-	}
-	else if (*str_char == 'u')
-		ft_putunbr(va_arg(args, unsigned int), counter);
-	else if (*str_char == 'd' || *str_char == 'i')
-		ft_putnbr(va_arg(args, int), counter);
-	else if (*str_char == 's')
-		ft_putstr(va_arg(args, const char *), counter);
-	else if (*str_char == 'x' || *str_char == 'X')
-		ft_puthex(va_arg(args, unsigned int), *str_char, counter);
-	else if (*str_char == 'p')
-	{
-		ft_putstr("0x", counter);
-		ft_puthexp(va_arg(args, unsigned long), counter);
-	}
+	counter = 0;
+	if (c == 'c')
+		counter = ft_putchar(va_arg(args, int));
+	if (c == 's')
+		counter = ft_putstr(va_arg(args, char *));
+	if (c == '%')
+		counter = write(1, "%", 1);
+	if (c == 'i' || c == 'd')
+		counter = ft_put_nbr(va_arg(args, int));
+	if (c == 'u')
+		counter = ft_put_u_nbr(va_arg(args, unsigned int));
+	if (c == 'x' || c == 'X')
+		counter = ft_put_hexadecimal(va_arg(args, unsigned int), c);
+	if (c == 'p')
+		counter = ft_put_pointer(va_arg(args, uintptr_t));
+	return (counter);
 }
 
-int	ft_printf(const char *, ...)
+int	ft_printf(const char *str, ...)
 {
-	va_list			args;
-	unsigned int	i;
-	unsigned int	result;
+	va_list	args;
+	int		i;
+	int		k;
+	int		count;
 
-	if (!str)
-		return (-1);
-	i = 0;
-	result = 0;
 	va_start(args, str);
-	while (str[i] != '\0')
+	count = 0;
+	i = 0;
+	k = 0;
+	while (str[i])
 	{
 		if (str[i] == '%')
 		{
-			if (str[i + 1] == '%')
-				result += write(1, "%", 1);
-			else
-				ft_flags(&str[i + 1], args, &result);
+			count += ft_check_conditions(str[i + 1], args);
 			i++;
+			k++;
 		}
 		else
-			result += write(1, &str[i], 1);
+			write(1, &str[i], 1);
+		count++;
 		i++;
 	}
 	va_end(args);
-	return (result);
+	return (count - k);
 }
