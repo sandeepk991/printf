@@ -1,18 +1,31 @@
-int     ft_putstr(char *str)
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_putstr.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: skaur <marvin@42.fr>                       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/11/17 10:02:35 by skaur             #+#    #+#             */
+/*   Updated: 2022/11/17 10:51:36 by skaur            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "ft_printf.h"
+
+int	ft_putstr(char *str)
 {
-        int     i;
+	int	i;
 
-        if (!str)
-        {
-                write(1, "(null)", 6);
-                return (6);
-        }
-        i = 0;
-        while (str[i])
-        {
-                write(1, &str[i], 1);
-                i++;
-        }
-        return (i);
+	if (!str)
+	{
+		write(1, "(null)", 6);
+		return (6);
+	}
+	i = 0;
+	while (str[i])
+	{
+		write(1, &str[i], 1);
+		i++;
+	}
+	return (i);
 }
-

@@ -6,13 +6,18 @@
 #    By: skaur <marvin@42.fr>                       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/12 10:01:21 by skaur             #+#    #+#              #
-#    Updated: 2022/11/01 13:13:20 by skaur            ###   ########.fr        #
+#    Updated: 2022/11/17 10:46:08 by skaur            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 NAME = libftprintf.a
 
 SRCS =  ft_printf.c \
-		ft_printf_utils.c
+	ft_hexadecimal.c \
+	ft_pointer.c \
+	ft_putchar.c \
+	ft_put_nbr.c \
+	ft_putstr.c \
+	ft_put_u_nbr.c
 
 AR = ar rcs
 

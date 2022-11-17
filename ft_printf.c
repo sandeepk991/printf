@@ -6,42 +6,42 @@
 /*   By: skaur <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 10:44:11 by skaur             #+#    #+#             */
-/*   Updated: 2022/11/08 15:28:54 by skaur            ###   ########.fr       */
+/*   Updated: 2022/11/17 11:01:02 by skaur            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int	ft_check_conditions(char c, va_list args)
+int	ft_check_conditions(char c, va_list ap)
 {
 	int	counter;
 
 	counter = 0;
-	if (c == 'c')
-		counter = ft_putchar(va_arg(args, int));
-	if (c == 's')
-		counter = ft_putstr(va_arg(args, char *));
 	if (c == '%')
 		counter = write(1, "%", 1);
+	if (c == 'c')
+		counter = ft_putchar(va_arg(ap, int));
+	if (c == 's')
+		counter = ft_putstr(va_arg(ap, char *));
 	if (c == 'i' || c == 'd')
-		counter = ft_put_nbr(va_arg(args, int));
+		counter = ft_put_nbr(va_arg(ap, int));
 	if (c == 'u')
-		counter = ft_put_u_nbr(va_arg(args, unsigned int));
+		counter = ft_put_u_nbr(va_arg(ap, unsigned int));
 	if (c == 'x' || c == 'X')
-		counter = ft_put_hexadecimal(va_arg(args, unsigned int), c);
+		counter = ft_hexadecimal(va_arg(ap, unsigned int), c);
 	if (c == 'p')
-		counter = ft_put_pointer(va_arg(args, uintptr_t));
+		counter = ft_pointer(va_arg(ap, unsigned long));
 	return (counter);
 }
 
 int	ft_printf(const char *str, ...)
 {
-	va_list	args;
+	va_list	ap;
 	int		i;
 	int		k;
 	int		count;
 
-	va_start(args, str);
+	va_start(ap, str);
 	count = 0;
 	i = 0;
 	k = 0;
@@ -49,7 +49,7 @@ int	ft_printf(const char *str, ...)
 	{
 		if (str[i] == '%')
 		{
-			count += ft_check_conditions(str[i + 1], args);
+			count += ft_check_conditions(str[i + 1], ap);
 			i++;
 			k++;
 		}
@@ -58,6 +58,6 @@ int	ft_printf(const char *str, ...)
 		count++;
 		i++;
 	}
-	va_end(args);
+	va_end(ap);
 	return (count - k);
 }
