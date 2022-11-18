@@ -18,7 +18,7 @@ int	ft_putchar(char c);
 int	ft_putstr(char *str);
 int	ft_put_nbr(int nb);
 int	ft_put_u_nbr(unsigned int nb);
-int	ft_hexadecimal(unsigned int hexnbr, char c);
+int	ft_hexadecimal(unsigned long hexnbr, char c);
 int	ft_pointer(unsigned long nb);
 int	ft_printf(const char *str, ...);
 

@@ -28,9 +28,9 @@ int	ft_check_conditions(char c, va_list ap)
 	if (c == 'u')
 		counter = ft_put_u_nbr(va_arg(ap, unsigned int));
 	if (c == 'x' || c == 'X')
-		counter = ft_hexadecimal(va_arg(ap, unsigned int), c);
+		counter = ft_hexadecimal((unsigned long)va_arg(ap, unsigned int), c);
 	if (c == 'p')
-		counter = ft_pointer(va_arg(ap, unsigned long));
+		counter = ft_pointer((unsigned long)(va_arg(ap, void *)));
 	return (counter);
 }
 

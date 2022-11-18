@@ -12,7 +12,7 @@
 
 #include "ft_printf.h"
 
-int	ft_hexadecimal(unsigned int hexnbr, char c)
+int	ft_hexadecimal(unsigned long hexnbr, char c)
 {
 	static int	count;
 

@@ -44,5 +44,14 @@ int main(void)
 	
 	len = ft_printf("%b\n", 98);
 	ft_printf("Len:[%d]\n", len);
+	
+
+	
+	printf(" %p %p \n", ULONG_MAX, -ULONG_MAX);
+	ft_printf(" %p %p \n\n", ULONG_MAX, -ULONG_MAX);
+	
+	printf(" %p %p \n", ULONG_MAX, -ULONG_MAX);
+	ft_printf(" %p %p \n ", ULONG_MAX, -ULONG_MAX);
+	
 	return (0);
 }
